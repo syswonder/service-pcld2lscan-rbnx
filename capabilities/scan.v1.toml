@@ -1,0 +1,11 @@
+# Converted LaserScan output from the scan converter service.
+# Downstream consumers (slam_toolbox, nav2, etc.) discover the
+# 2D LaserScan topic through this contract.
+[contract]
+id      = "robonix/service/lidar/scan_converter/scan"
+version = "1"
+kind    = "service"
+idl     = "common_interfaces/sensor_msgs/msg/LaserScan.msg"
+
+[mode]
+type = "topic_out"

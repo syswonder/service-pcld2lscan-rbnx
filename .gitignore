@@ -1,0 +1,21 @@
+# Generated after building project
+build/
+install/
+log/
+*.pyc# RBNX build
+rbnx-build/
+
+# Python
+__pycache__/
+*.pyo
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

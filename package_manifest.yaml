@@ -1,0 +1,39 @@
+# pcld2lscan-rbnx — PointCloud2 → LaserScan conversion service.
+#
+# Converts a 3D PointCloud2 topic (from a lidar primitive such as
+# unilidar_l2) into a 2D LaserScan topic, wrapping the system-installed
+# pointcloud_to_laserscan ROS2 node.
+#
+# Owns the `robonix/service/lidar/scan_converter/*` namespace.
+#
+# Lifecycle: start.sh launches the atlas bridge ONLY (no conversion node).
+# `rbnx boot` calls Driver(CMD_INIT, config_json) — the handler resolves
+# the upstream lidar3d topic from atlas, spawns pointcloud_to_laserscan_node,
+# waits for the scan output, then declares the scan topic on atlas.
+#
+# Capability surface:
+#   service/lidar/scan_converter/driver  rpc   gRPC  Driver(INIT)
+#   service/lidar/scan_converter/scan     topic_out  ROS2  converted LaserScan
+#
+# Config (passed via Driver(CMD_INIT, config_json)):
+#   scan_frame      default "scanner"   — target frame for the output scan
+#   scan_rate_hz    default 10.0        — desired scan rate
+#   scan_timeout_s  default 15.0        — wait for scan output topic
+#   topic_remap     dict — per-key override of atlas-resolved bindings
+manifestVersion: 1
+
+package:
+  name: com.robonix.service.pcld2lscan
+  version: 0.1.0
+  vendor: robonix
+  description: PointCloud2 to LaserScan conversion service.
+  license: Apache-2.0
+
+capability_id: pcld2lscan
+
+build: bash scripts/build.sh
+start: bash scripts/start.sh
+
+capabilities:
+  - name: robonix/service/lidar/scan_converter/driver
+  - name: robonix/service/lidar/scan_converter/scan

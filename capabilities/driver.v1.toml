@@ -1,0 +1,10 @@
+# Lifecycle interface every scan converter MUST declare.
+# `rbnx boot` calls Driver(CMD_INIT, config_json) against this interface.
+[contract]
+id      = "robonix/service/lidar/scan_converter/driver"
+version = "1"
+kind    = "service"
+idl     = "lifecycle/srv/Driver.srv"
+
+[mode]
+type = "rpc"
