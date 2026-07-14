@@ -9,11 +9,11 @@ cd "$PKG"
 ROS_DISTRO="${ROS_DISTRO:-humble}"
 set +u; source "/opt/ros/${ROS_DISTRO}/setup.bash"; set -u
 
-# Source vendored ROS2 package install if present
-ROS_INSTALL="$PKG/install"
+# The vendored colcon workspace is rooted at src/, so its install tree is
+# src/install (not the package root's install/ directory).
+ROS_INSTALL="$PKG/src/install"
 if [ -f "$ROS_INSTALL/setup.bash" ]; then
     set +u; source "$ROS_INSTALL/setup.bash"; set -u
-    source install/setup.bash
 fi
 
 export PYTHONPATH="$PKG/rbnx-build/codegen/proto_gen:$PKG/rbnx-build/codegen/robonix_mcp_types:$PKG:${PYTHONPATH:-}"

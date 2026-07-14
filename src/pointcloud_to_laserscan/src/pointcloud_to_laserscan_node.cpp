@@ -75,7 +75,11 @@ PointCloudToLaserScanNode::PointCloudToLaserScanNode(const rclcpp::NodeOptions &
   inf_epsilon_ = this->declare_parameter("inf_epsilon", 1.0);
   use_inf_ = this->declare_parameter("use_inf", true);
 
-  pub_ = this->create_publisher<sensor_msgs::msg::LaserScan>("scan", rclcpp::SensorDataQoS());
+  // Offer RELIABLE so both Nav2's BEST_EFFORT sensor subscribers and
+  // RELIABLE safety/diagnostic subscribers (for example velocity_guard)
+  // can match this publisher.
+  pub_ = this->create_publisher<sensor_msgs::msg::LaserScan>(
+    "scan", rclcpp::QoS(rclcpp::KeepLast(10)).reliable());
 
   using std::placeholders::_1;
   // if pointcloud target frame specified, we need to filter by transform availability

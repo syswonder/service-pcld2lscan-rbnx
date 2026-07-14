@@ -218,7 +218,7 @@ def init(cfg):
     svc.declare_ros2_topic(
         "robonix/service/lidar/scan_converter/scan",
         scan_topic,
-        qos="best_effort",
+        qos="reliable",
         description="Converted LaserScan from PointCloud2",
     )
 
