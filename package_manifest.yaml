@@ -23,11 +23,14 @@
 manifestVersion: 1
 
 package:
-  name: com.robonix.service.pcld2lscan
+  name: robonix.service.pcld2lscan
   version: 0.1.0
   vendor: robonix
   description: PointCloud2 to LaserScan conversion service.
   license: Apache-2.0
+  tags: [service, lidar, pointcloud, laserscan, ros2]
+  maintainers:
+    - Bunnycxk <2501213313@stu.pku.edu.cn>
 
 capability_id: pcld2lscan
 
